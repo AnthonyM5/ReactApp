@@ -1,34 +1,49 @@
-import React, { useState } from 'react';
-import { Text, TextInput, View, StyleSheet } from 'react-native';
+import React, { useState }from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import {RoundedButton} from '../../components/RoundedButton'
+import {fontSizes, spacing} from '../../utils/Sizes'
+import { colors } from '../../utils/Colors'
 
 
-export const Focus = () => {
-  const [text, setText] = useState('');
-  console.log(text)
+export const Focus = ({ addSubject }) => {
+  const [tempItem, setTempItem] = useState(null)
+
   return (
     <View style={styles.container}>
-    <Text>Emojifier!</Text>
-    <TextInput
-        style={{height: 40}}
-        placeholder="Type here to translate!"
-        onChangeText={text => setText(text)}
-        defaultValue={text}
-      />
-      <Text style={{padding: 10, fontSize: 42}}>
-        {text.split(' ').map((word) => word && '🍕').join('')}
-        Word Count: {text.split(' ').length > 1 ? text.split(' ').length : 0}
-      </Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>"What would you like to focus on?"</Text>
+        <View style={styles.inputContainer}>
+          <TextInput style={{flex: 1, marginRight: spacing.md}} 
+          onSubmitEditing={({ nativeEvent }) => {
+            setTempItem
+            (nativeEvent.text)
+          }}/>
+          <RoundedButton size={50} title="+" onPress={() => addSubject(tempItem)}/>
+        </View>
+      </View>
     </View>
-    
   );
-}
-
-
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
-  }
-  
+  },
+
+  titleContainer: {
+    flex: 0.5,
+    padding: spacing.md,
+    justifyContent: 'center',
+  },
+  title: {
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: fontSizes.lg,
+  },
+  inputContainer: {
+    paddingTop: spacing.md,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
 });
