@@ -30,7 +30,12 @@ export const Countdown = ({
   }
 
   useEffect(() => {
+    setMillis(minutesToMil(minutes))
+  }, [minutes])
+
+  useEffect(() => {
     if (isPaused) {
+      if (interval.current) clearInterval(interval.current)
       return
     }
     interval.current = setInterval(countDown, 1000)
