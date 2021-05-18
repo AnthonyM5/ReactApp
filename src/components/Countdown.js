@@ -12,6 +12,7 @@ const formatTime = (time) => time < 10 ? `0${time}` : time
 export const Countdown = ({
   minutes = 20,
   isPaused,
+  onProgress
 }) => {
   const interval = React.useRef(null)
 
@@ -22,7 +23,8 @@ export const Countdown = ({
         return time
       }
       const timeLeft = time - 1000
-
+    // report progress
+    onProgress(timeLeft / minutesToMil(minutes))
       return timeLeft
     })
   }
