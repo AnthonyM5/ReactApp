@@ -1,16 +1,15 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Focus } from './src/features/focus/Focus'
-
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Focus } from './src/features/focus/Focus';
+import { colors } from './src/utils/Colors'
 
 
 export default function App() {
+  const [focusSubject, setFocusSubject] = useState(null);
   return (
     <View style={styles.container}>
-    <View style={styles.titleContainer}>
-    <Text style={styles.title}>Hello World!</Text>
-    </View>
-    <Focus />
+    {focusSubject ? (<Text>Here is timer</Text>) : (<Focus addSubject={setFocusSubject}/>) }
+    <Text>{focusSubject}</Text>
     </View>
   );
 }
@@ -19,15 +18,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
-  },
-  titleContainer: {
-    flexDirection: 'center',
-    justifyContent: 'center'
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 24,
+    backgroundColor: colors.lightBlue,
+    padding: 10,
   }
   
 });
