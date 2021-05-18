@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
+import {RoundedButton} from '../../components/RoundedButton'
 
 
 export const Focus = () => {
@@ -14,9 +15,10 @@ export const Focus = () => {
         onChangeText={text => setText(text)}
         defaultValue={text}
       />
+      <RoundedButton />
       <Text style={{padding: 10, fontSize: 42}}>
         {text.split(' ').map((word) => word && '🍕').join('')}
-        Word Count: {text.split(' ').length > 1 ? text.split(' ').length : 0}
+        Word Count: {text.split(' ').length > 1 ? text.split(' ').length - 1 : 0}
       </Text>
     </View>
     
