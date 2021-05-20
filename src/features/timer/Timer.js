@@ -1,32 +1,27 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Vibration, Platform } from 'react-native';
-import { ProgressBar } from 'react-native-paper'
+import { ProgressBar } from 'react-native-paper';
 
 
 import { colors }  from '../../utils/Colors';
 import { spacing }  from '../../utils/Sizes';
-import { Countdown } from '../../components/Countdown'
-import { RoundedButton } from '../../components/RoundedButton'
-import { Timing } from './Timing'
+import { Countdown } from '../../components/Countdown';
+import { RoundedButton } from '../../components/RoundedButton';
+import { Timing } from './Timing';
 
-import {useKeepAwake} from 'expo-keep-awake'
+import {useKeepAwake} from 'expo-keep-awake';
 
 
-
+const DEFAULT_TIME = 0.1
 export const Timer = ({focusSubject}) => {
   useKeepAwake()
-  const [minutes, setMinutes] = useState(0.1)
+
+  const [minutes, setMinutes] = useState(DEFAULT_TIME)
   const [isStarted, setIsStarted] = useState(false)
   const [progress, setProgress] = useState(1)
 
   const onProgress = (progress) => {
     setProgress(progress)
-  }
-
-  const changeTime = (min) => {
-    setMinutes(min)
-    setProgress(1)
-    setIsStarted(false)
   }
 
   const vibrate = () => {
@@ -38,11 +33,23 @@ export const Timer = ({focusSubject}) => {
     }
   }
 
+  const onEnd = () => {
+    vibrate()
+    setMinutes(DEFAULT_TIME)
+    setProgress(1)
+    setIsStarted(false)
+  }
+
+  const changeTime = (min) => {
+    setMinutes(min)
+    setProgress(1)
+    setIsStarted(false)
+  }
 
   return (
     <View style={styles.container}>
     <View style={styles.countdown}>
-      <Countdown minutes={minutes} isPaused={!isStarted} onProgress={onProgress} />
+      <Countdown minutes={minutes} isPaused={!isStarted} onProgress={onProgress} onEnd={onEnd} />
     </View>
     <View style={{paddingTop: spacing.xxl}}>
     <Text style={styles.title}>Focusing On:</Text>
@@ -83,7 +90,7 @@ const styles = StyleSheet.create({
   countdown: {
     flex: 0.5,
     alignItems: 'center',
-    justify: 'center'
+    justifyContent: 'center'
   },
   buttons: {
     flex: 0.3,
