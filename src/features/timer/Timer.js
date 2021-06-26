@@ -13,7 +13,7 @@ import {useKeepAwake} from 'expo-keep-awake';
 
 
 const DEFAULT_TIME = 0.1
-export const Timer = ({focusSubject, onTimerEnd}) => {
+export const Timer = ({focusSubject, onTimerEnd, clearSubject}) => {
   useKeepAwake()
 
   const [minutes, setMinutes] = useState(DEFAULT_TIME)
@@ -67,9 +67,11 @@ export const Timer = ({focusSubject, onTimerEnd}) => {
       <Timing onChangeTime={changeTime} />
     </View>
     <View style={styles.buttons}>
-    {isStarted ? <RoundedButton title="Pause" onPress={ () => setIsStarted(false)}/> : <RoundedButton title="Start" onPress={ () => setIsStarted(true)}/>}
-    </View>
-    
+      {isStarted ? <RoundedButton title="Pause" onPress={ () => setIsStarted(false)}/> : <RoundedButton title="Start" onPress={ () => setIsStarted(true)}/>}
+      </View>
+        <View style={styles.clearSubject}>
+          <RoundedButton size={50} title="-" onPress={() => clearSubject()}/>
+        </View>
     </View>
   )
  
@@ -99,6 +101,10 @@ const styles = StyleSheet.create({
     padding: 15,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  clearSubject: {
+    paddingBottom: 25,
+    paddingLeft: 25
   }
   
 })
