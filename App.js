@@ -10,7 +10,9 @@ export default function App() {
   const [focusSubject, setFocusSubject] = useState(null);
   return (
     <View style={styles.container}>
-    {focusSubject ? <Timer focusSubject={focusSubject} /> : (<Focus addSubject={setFocusSubject}/>) }
+      {focusSubject ? <Timer focusSubject={focusSubject} onTimerEnd={ () => {
+        setFocusSubject(null)
+      }}/> : (<Focus addSubject={setFocusSubject}/>) }
     </View>
   );
 }
