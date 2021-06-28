@@ -2,7 +2,7 @@ import React from "react"
 import { View, StyleSheet, FlatList, Text, SafeAreaView } 
 from "react-native"
 
-import { fontSizes } from "../../utils/Sizes"
+import { fontSizes, spacing } from "../../utils/Sizes"
 import { RoundedButton } from "../../components/RoundedButton"
 
 const HistoryItem = ({item, index}) => {
@@ -12,24 +12,30 @@ const HistoryItem = ({item, index}) => {
 }
 
 
-export const FocusHistory = ({focusHistory, onClear}) => {
+export const FocusHistory = ({ focusHistory, onClear }) => {
     const clearHistory = () => {
-        onClear()
-    }
+      onClear()
+    };
     return (
         <>
-        <SafeAreaView style={{flex: 0.5}}>
-            <Text style={styles.title}>
-                FocusTime History
-            </Text>
-            {!!focusHistory.length && 
-            <FlatList
-                style={{flex: 1}}
-                contentContainerStyle={{flex: 1, alignItems: 'center'}}
-                data={focusHistory}
-                renderItem={HistoryItem}
-            />}
+        <SafeAreaView style={{flex: 0.5, alignItems: 'center'}}>
+            
+            {!!focusHistory.length && (
+                <>
+                <Text style={styles.title}> FocusTime History </Text>
+                <FlatList
+                    style={{flex: 1}}
+                    contentContainerStyle={{flex: 1, alignItems: 'center'}}
+                    data={focusHistory}
+                    renderItem={HistoryItem}
+                />
+                <View style={styles.clearContainer}>
+                    <RoundedButton size={75} title={"Clear"} onPress={() => onClear()}/>
+                </View>
+                </>
+            )}
         </SafeAreaView>
+        
         </>
     )
 }
@@ -46,5 +52,9 @@ const styles = StyleSheet.create({
     incomplete: {
         color: 'red',
         fontSize: fontSizes.md
+    },
+    clearContainer: {
+        alignItems: 'center',
+        padding: spacing.md
     }
 })
