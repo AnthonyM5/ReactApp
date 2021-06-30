@@ -12,7 +12,7 @@ import { Timing } from './Timing';
 import {useKeepAwake} from 'expo-keep-awake';
 
 
-const DEFAULT_TIME = 0.1
+const DEFAULT_TIME = 10
 export const Timer = ({focusSubject, onTimerEnd, clearSubject}) => {
   useKeepAwake()
 

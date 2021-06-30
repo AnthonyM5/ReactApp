@@ -32,7 +32,7 @@ export const Focus = ({ addSubject }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.5,
+    flex: 1,
   },
 
   titleContainer: {
