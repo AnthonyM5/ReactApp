@@ -11,8 +11,8 @@ const formatTime = (time) => time < 10 ? `0${time}` : time
 
 export const Countdown = ({
   minutes = 20,
-  isPaused,
   onProgress,
+  isPaused,
   onEnd
 }) => {
   const interval = React.useRef(null)
@@ -27,7 +27,6 @@ export const Countdown = ({
       }
       const timeLeft = time - 1000
     // report progress
-    onProgress(timeLeft / minutesToMil(minutes))
       return timeLeft
     })
   }
@@ -35,6 +34,10 @@ export const Countdown = ({
   useEffect(() => {
     setMillis(minutesToMil(minutes))
   }, [minutes])
+
+  useEffect(() => {
+    onProgress(millis / minutesToMil(minutes))
+  }, [millis])
 
   useEffect(() => {
     if (isPaused) {
