@@ -18,8 +18,8 @@ export default function App() {
     CANCELLED: 2,
   };
 
-  const addSubjectWithState = (subject, status) => {
-    setFocusHistory([...focusHistory, { subject, status }]);
+  const addSubjectWithStatus = (subject, status) => {
+    setFocusHistory([...focusHistory, {key: String(focusHistory.length + 1), subject, status }]);
   };
 
   const onClear = () => {
@@ -60,11 +60,11 @@ export default function App() {
         <Timer
           focusSubject={focusSubject}
           onTimerEnd={() => {
-            addSubjectWithState(focusSubject, STATUSES.COMPLETE);
+            addSubjectWithStatus(focusSubject, STATUSES.COMPLETE);
             setFocusSubject(null);
           }}
           clearSubject={() => {
-            addSubjectWithState(focusSubject, STATUSES.CANCELLED);
+            addSubjectWithStatus(focusSubject, STATUSES.CANCELLED);
             setFocusSubject(null);
           }}
         />
