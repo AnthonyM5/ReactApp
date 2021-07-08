@@ -5,9 +5,11 @@ import { colors } from './src/utils/Colors';
 import { spacing } from './src/utils/Sizes';
 import { Timer } from './src/features/timer/Timer';
 
+
 import { FocusHistory } from './src/features/focus/FocusHistory';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 
 export default function App() {
   const [focusSubject, setFocusSubject] = useState(null);
@@ -19,7 +21,7 @@ export default function App() {
   };
 
   const addSubjectWithStatus = (subject, status) => {
-    setFocusHistory([...focusHistory, {key: String(focusHistory.length + 1), subject, status }]);
+    setFocusHistory([...focusHistory, {key: uuid.v4(), subject, status }]);
   };
 
   const onClear = () => {
