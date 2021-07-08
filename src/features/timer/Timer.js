@@ -66,7 +66,7 @@ export const Timer = ({focusSubject, onTimerEnd, clearSubject}) => {
     style={{
     height: 10,}}/>
     </View>
-    <View style={styles.buttons}>
+    <View style={styles.buttonContainer}>
       <Timing onChangeTime={changeTime} />
     </View>
     <View style={styles.buttons}>
@@ -83,6 +83,7 @@ export const Timer = ({focusSubject, onTimerEnd, clearSubject}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexWrap: 'wrap',
   },
   title: {
     color: colors.white,
@@ -97,6 +98,12 @@ const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    padding: spacing.lg,
+    justifyContent: 'space-around',
+    alignContent: 'center'
   },
   buttons: {
     flex: 0.3,

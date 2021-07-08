@@ -22,6 +22,6 @@ export const Timing = ({ onChangeTime }) => {
 
 const styles = StyleSheet.create({
   timingButton: {
-    flex: 1
+    padding: 10
   }
 })
