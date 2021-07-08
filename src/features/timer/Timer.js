@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Vibration, Platform } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
+import { Audio } from "expo-av";
 
 
 import { colors }  from '../../utils/Colors';
@@ -11,7 +12,7 @@ import { Timing } from './Timing';
 
 import {useKeepAwake} from 'expo-keep-awake';
 
-
+const soundObject = new Audio.Sound();
 const DEFAULT_TIME = 10
 export const Timer = ({focusSubject, onTimerEnd, clearSubject}) => {
   useKeepAwake()
@@ -33,7 +34,9 @@ export const Timer = ({focusSubject, onTimerEnd, clearSubject}) => {
     }
   }
 
-  const onEnd = () => {
+  const onEnd = async () => {
+    await soundObject.loadAsync(require("../../../assets/notification-bell.wav"));
+    await soundObject.playAsync();
     vibrate()
     setMinutes(DEFAULT_TIME)
     setProgress(1)

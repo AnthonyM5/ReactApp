@@ -56,6 +56,12 @@ export default function App() {
     saveFocusHistory();
   }, [focusHistory]);
 
+  useEffect(() => {
+    return async () => {
+      await soundObject.unloadAsync();
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
       {focusSubject ? (
